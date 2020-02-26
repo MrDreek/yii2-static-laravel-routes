@@ -55,13 +55,12 @@ class Route
     {
         $return_data = [];
 
-
         // add special patterns: :any and :num
         self::pattern('(:any)', '(.+)');
         self::pattern('(:num)', '\d+');
 
         /**
-         * @var _Route_object $route
+         * @var _Route_object
          */
         foreach (self::$routes as $route) {
             $routeData = $route->make();
@@ -93,10 +92,9 @@ class Route
             }
 
             $return_data[$routeData['from']] = [
-                'to' => $routeData['to'],
-                'filters' => $filters
+                'to'      => $routeData['to'],
+                'filters' => $filters,
             ];
-
         }
 
         //$return_data['filters']	= self::$filters;
@@ -105,12 +103,12 @@ class Route
     }
 
     /**
-     * Adds a pattern like {id} with it's regex equivalent
+     * Adds a pattern like {id} with it's regex equivalent.
      *
-     * @param mixed $definition
+     * @param mixed  $definition
      * @param string $regex
      */
-    public static function pattern($definition, $regex = NULL)
+    public static function pattern($definition, $regex = null)
     {
         if ($regex !== null && is_string($definition)) {
             if ($regex === '(:any)') {
@@ -130,10 +128,12 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
-     * @return _Route_object_facade
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @throws InvalidConfigException
+     *
+     * @return _Route_object_facade
      */
     public static function any($from, $to, $options = [], $nested = false)
     {
@@ -141,15 +141,17 @@ class Route
     }
 
     /**
-     * Does the heavy lifting creating route objects
+     * Does the heavy lifting creating route objects.
      *
      * @param string $type
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
-     * @return _Route_object_facade
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @throws InvalidConfigException
+     *
+     * @return _Route_object_facade
      */
     public static function createRoute($type, $from, $to, $options = [], $nested = false)
     {
@@ -175,7 +177,8 @@ class Route
     }
 
     /**
-     * Returns the last options from the active prefix, in case there is none, will return an empty array
+     * Returns the last options from the active prefix, in case there is none, will return an empty array.
+     *
      * @return array
      */
     private static function getGroupOptions()
@@ -188,8 +191,10 @@ class Route
     }
 
     /**
-     * Returns the last active prefix or an empty string in case there is none
+     * Returns the last active prefix or an empty string in case there is none.
+     *
      * @param string $from
+     *
      * @return string
      */
     private static function getPrefix($from = '')
@@ -198,7 +203,6 @@ class Route
             $prefix_string = implode('/', self::$prefix);
 
             if (!$from === '') {
-
                 if (substr($from, 0) === '/') {
                     $from = ltrim($from, '/');
                 }
@@ -207,14 +211,13 @@ class Route
             }
 
             return $prefix_string;
-
         }
 
         return $from;
     }
 
     /**
-     * @param array $options
+     * @param array    $options
      * @param callable $routes
      */
     public static function group($routes, $options = [])
@@ -237,7 +240,7 @@ class Route
     }
 
     /**
-     * Adds one level of prefix routing
+     * Adds one level of prefix routing.
      *
      * @param string $prefix
      */
@@ -251,7 +254,8 @@ class Route
     }
 
     /**
-     * Adds a list of options from the new prefix
+     * Adds a list of options from the new prefix.
+     *
      * @param array $options
      */
     private static function addGroupOptions($options)
@@ -261,11 +265,11 @@ class Route
 
     private static function is_closure($routes)
     {
-        return (is_object($routes) && ($routes instanceof Closure));
+        return is_object($routes) && ($routes instanceof Closure);
     }
 
     /**
-     * Deletes one level of prefix options
+     * Deletes one level of prefix options.
      */
     private static function deleteGroupOptions()
     {
@@ -273,7 +277,7 @@ class Route
     }
 
     /**
-     * Deletes one level of prefix routing
+     * Deletes one level of prefix routing.
      */
     private static function deletePrefix()
     {
@@ -283,8 +287,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function get($from, $to, $options = [], $nested = false)
@@ -295,8 +300,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function post($from, $to, $options = [], $nested = false)
@@ -307,8 +313,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function put($from, $to, $options = [], $nested = false)
@@ -319,8 +326,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function delete($from, $to, $options = [], $nested = false)
@@ -331,8 +339,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function head($from, $to, $options = [], $nested = false)
@@ -343,8 +352,9 @@ class Route
     /**
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param array  $options
+     * @param mixed  $nested
+     *
      * @return _Route_object_facade
      */
     public static function patch($from, $to, $options = [], $nested = false)
@@ -353,12 +363,14 @@ class Route
     }
 
     /**
-     * Let's the user define manually the http verbs that will have this route
+     * Let's the user define manually the http verbs that will have this route.
+     *
      * @param array|string $http_verb
-     * @param string $from
-     * @param string $to
-     * @param array $options
-     * @param mixed $nested
+     * @param string       $from
+     * @param string       $to
+     * @param array        $options
+     * @param mixed        $nested
+     *
      * @return _Route_object_facade
      */
     public static function match($http_verb, $from, $to, $options = [], $nested = false)
@@ -373,8 +385,10 @@ class Route
     }
 
     /**
-     * Syntactic sugar to get the named uri parameters
+     * Syntactic sugar to get the named uri parameters.
+     *
      * @param string $uri_name
+     *
      * @return array|mixed
      */
     public static function input($uri_name)
@@ -383,43 +397,44 @@ class Route
     }
 
     /**
-     * Adds a named route into the system
+     * Adds a named route into the system.
      *
      * @param string $route_alias
      * @param string $route_from
      */
     public static function set_name($route_alias, $route_from)
     {
-        Yii::setAlias(self::$alias_prefix . $route_alias, $route_from);
+        Yii::setAlias(self::$alias_prefix.$route_alias, $route_from);
     }
 
     /**
      * @param array|string $route
-     * @param string[] $parameters
-     * @param boolean $scheme
+     * @param string[]     $parameters
+     * @param bool         $scheme
+     *
      * @return string
      */
     public static function named($route, $parameters = [], $scheme = false)
     {
-        $route = (array)$route;
-        $route[0] = Yii::getAlias(self::$alias_prefix . $route[0]);
+        $route = (array) $route;
+        $route[0] = Yii::getAlias(self::$alias_prefix.$route[0]);
 
         foreach ($parameters as $name => $value) {
-            $route[0] = preg_replace('/{' . $name . '\??}/', $value, $route[0]);
+            $route[0] = preg_replace('/{'.$name.'\??}/', $value, $route[0]);
         }
 
         // get rid of remaining optional uri parameters
         // because we may only want to use some or none of them
         $route[0] = preg_replace('/{(.*)\?}/', '', $route[0]);
 
-
         return Url::toRoute($route, $scheme);
     }
 
     /**
-     * Returns an existing pattern or NULL
+     * Returns an existing pattern or NULL.
      *
      * @param string $definition
+     *
      * @return NULL/string
      */
     public static function getPattern($definition)
@@ -428,19 +443,20 @@ class Route
             return self::$pattern[$definition];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
-     * Adds a new filter pattern that will be added to all routes that match with its defined regex
+     * Adds a new filter pattern that will be added to all routes that match with its defined regex.
+     *
      * @param string $regex_pattern
-     * @param mixed $filter
-     * @param array $http_verb
+     * @param mixed  $filter
+     * @param array  $http_verb
+     *
      * @throws Exception
      */
     public static function when($regex_pattern, $filter, $http_verb = ['ANY'])
     {
-
         if (!is_array($http_verb)) {
             throw new Exception('[Route::when] The http verb of filter patterns must be an array.');
         }
@@ -461,7 +477,7 @@ class Route
 
         // add regex start and ending if not setted
         if (!(strpos($regex_pattern, '/') === 0 && $regex_pattern[strlen($regex_pattern) - 1] === '/')) {
-            $regex_pattern = '/' . $regex_pattern . '$/';
+            $regex_pattern = '/'.$regex_pattern.'$/';
         }
 
         foreach ($http_verb as $key => $verb) {
@@ -470,14 +486,16 @@ class Route
 
         self::$when_filters[] = [
             'regex_pattern' => $regex_pattern,
-            'filter' => $filter,
-            'http_verb' => $http_verb
+            'filter'        => $filter,
+            'http_verb'     => $http_verb,
         ];
     }
 
     /**
-     * Returns all the pattern filters that match with its defined regex
+     * Returns all the pattern filters that match with its defined regex.
+     *
      * @param string $from
+     *
      * @return array
      */
     public static function getWhenFilters($from)
@@ -509,25 +527,24 @@ class Route
     /**
      * Adds a new filter into the Routing system
      * It will be set as RoutesFilter object in case $data is a closure (Laravel standard filtering) or
-     * as a standard filter if $data it's an array
+     * as a standard filter if $data it's an array.
      *
-     * @param string $filterName
+     * @param string                $filterName
      * @param array|callable|string $data
      */
     public static function filter($filterName, $data)
     {
-
         if (self::is_closure($data)) {
             self::$filters[$filterName] = [
                 'class' => RoutesFilter::class,
-                'rule' => $data
+                'rule'  => $data,
             ];
         } elseif (is_array($data)) {
             self::$filters[$filterName] = $data;
         } elseif (is_string($data)) {
             self::$filters[$filterName] =
                 [
-                    'class' => $data
+                    'class' => $data,
                 ];
         }
     }
@@ -539,7 +556,6 @@ class Route
     {
         throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
     }
-
 }
 
 class _Route_object_facade
@@ -548,7 +564,6 @@ class _Route_object_facade
      * @var _Route_object
      */
     private $route_object;
-
 
     /**
      * @param _Route_object $route_object
@@ -559,11 +574,12 @@ class _Route_object_facade
     }
 
     /**
-     * Adds a named parameter that will only work locally in the route_object
+     * Adds a named parameter that will only work locally in the route_object.
+     *
      * @param string|array $parameter_name
-     * @param string $parameter_expression
+     * @param string       $parameter_expression
      */
-    public function where($parameter_name, $parameter_expression = NULL)
+    public function where($parameter_name, $parameter_expression = null)
     {
         if ($parameter_expression === null && is_array($parameter_name)) {
             foreach ($parameter_name as $key => $expression) {
@@ -577,7 +593,6 @@ class _Route_object_facade
 
 class _Route_object
 {
-
     /**
      * @var string
      */
@@ -592,7 +607,8 @@ class _Route_object
     private $checked_from;
     /**
      * Tells if the from() method has been already called
-     * in order to avoid calling again the from making route calls
+     * in order to avoid calling again the from making route calls.
+     *
      * @var bool
      */
     private $check_from_made = false;
@@ -633,8 +649,9 @@ class _Route_object
      * @param string $type
      * @param string $from
      * @param string $to
-     * @param array $options
-     * @param bool $nested
+     * @param array  $options
+     * @param bool   $nested
+     *
      * @throws InvalidConfigException
      */
     public function __construct($type, $from, $to, $options, $nested)
@@ -649,7 +666,6 @@ class _Route_object
         $this->makeParams();
     }
 
-
     /**
      * @throws InvalidConfigException
      */
@@ -658,7 +674,6 @@ class _Route_object
         // check for domain options
 
         if (array_key_exists('domain', $this->options)) {
-
             $web_domain = preg_replace('/http(s?):\/\//', '', Yii::$app->urlManager->getHostInfo());
             $web_domain = explode('.', $web_domain);
 
@@ -669,14 +684,13 @@ class _Route_object
 
             $web_domain = implode('.', $web_domain);
 
-            $this->options['domain'] = 'http://' . $this->options['domain'] . '.' . $web_domain;
+            $this->options['domain'] = 'http://'.$this->options['domain'].'.'.$web_domain;
 
             if (substr($this->options['domain'], -1) !== '/') {
                 $this->options['domain'] .= '/';
             }
 
-
-            $this->from = $this->options['domain'] . $this->from;
+            $this->from = $this->options['domain'].$this->from;
             $this->checked_from = $this->from;
         }
 
@@ -690,7 +704,7 @@ class _Route_object
                 if (substr($c, -1) === '?') {
                     $c = rtrim($c, '?');
                     $uris[] = $c;
-                    $this->checked_from = str_replace('{' . $c . '?}', '{' . $c . '}', $this->checked_from);
+                    $this->checked_from = str_replace('{'.$c.'?}', '{'.$c.'}', $this->checked_from);
                 }
 
                 $this->patterns[] = $c;
@@ -732,10 +746,9 @@ class _Route_object
 
     /**
      * Makes the optional additional routes. It's important to keep the
-     * data the same as the parent route
+     * data the same as the parent route.
      *
      * This method MUST be called BEFORE calling checkFrom()
-     *
      */
     public function launchOptionalRoutes()
     {
@@ -743,7 +756,7 @@ class _Route_object
             $sub_from = $this->checked_from;
 
             foreach ($parameters as $c) {
-                $sub_from = str_replace('/{' . $c . '}', '', $sub_from);
+                $sub_from = str_replace('/{'.$c.'}', '', $sub_from);
             }
 
             // we get rid of the optional question mark because we will launch all optional
@@ -761,13 +774,13 @@ class _Route_object
 
             $this->optional_routesList[] = Route::createRoute($this->type, $sub_from, $this->to, $new_options, $this->nested);
         }
-
     }
 
     /**
-     * Adds a local pattern to the route and all it's optional versions
+     * Adds a local pattern to the route and all it's optional versions.
+     *
      * @param string $pattern
-     * @param mixed $pattern_expression
+     * @param mixed  $pattern_expression
      */
     public function addLocalPattern($pattern, $pattern_expression)
     {
@@ -780,8 +793,7 @@ class _Route_object
 
     /**
      * Returns the transformed data of the Route object that will be
-     * processed in the Module
-     *
+     * processed in the Module.
      */
     public function make()
     {
@@ -798,7 +810,7 @@ class _Route_object
     }
 
     /**
-     * Transforms the $from object variable
+     * Transforms the $from object variable.
      *
      * @return string
      */
@@ -813,7 +825,7 @@ class _Route_object
         $returnString = $this->checked_from;
 
         if ($this->type !== '') {
-            $returnString = $this->type . ' ' . $returnString;
+            $returnString = $this->type.' '.$returnString;
         }
 
         return $returnString;
@@ -821,7 +833,7 @@ class _Route_object
 
     /**
      * Changes the Laravel-like uri patterns into Yii2 uri patterns in the $checked_from variable
-     * that will be used to make the final from route in $this->from()
+     * that will be used to make the final from route in $this->from().
      */
     private function checkFrom()
     {
@@ -839,18 +851,19 @@ class _Route_object
             }
 
             if (strpos($c, '(') === 0) {
-                $this->checked_from = str_replace($c, '<var_' . $param_number++ . ':' . $patternRegex . '>', $this->checked_from);
+                $this->checked_from = str_replace($c, '<var_'.$param_number++.':'.$patternRegex.'>', $this->checked_from);
             } else {
-                $this->checked_from = str_replace('{' . $c . '}', '<' . $c . ':' . $patternRegex . '>', $this->checked_from);
+                $this->checked_from = str_replace('{'.$c.'}', '<'.$c.':'.$patternRegex.'>', $this->checked_from);
             }
         }
     }
 
     /**
      * Returns the option passed in $option parameter in case it exists in
-     * $this->options or otherwise, false
+     * $this->options or otherwise, false.
      *
      * @param string $option
+     *
      * @return bool|mixed
      */
     private function get_option($option)
@@ -885,7 +898,6 @@ class _Route_object
             $filters['before'] = array_merge($filters['before'], $pattern_filters['before']);
         }
 
-
         if ($this->get_option('after') !== false) {
             if (is_string($this->get_option('after'))) {
                 $filter_checked = explode('|', $this->get_option('after'));
@@ -917,11 +929,10 @@ class _Route_object
         }
 
         return $filters;
-
     }
 
     /**
-     * Transforms the $to object variable
+     * Transforms the $to object variable.
      *
      * @return string
      */
@@ -933,5 +944,4 @@ class _Route_object
 
         return $returnString;
     }
-
 }

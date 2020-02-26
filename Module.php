@@ -11,12 +11,10 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 
-
 class Module extends \yii\base\Module
 {
-
     /**
-     * Defines the database tableName
+     * Defines the database tableName.
      */
     public static $tableName = 'site_routes';
     /**
@@ -33,26 +31,26 @@ class Module extends \yii\base\Module
     public $showScriptName = false;
     /**
      * String array that will hold all the directories in which we will have
-     * the routes files
+     * the routes files.
      *
      * @var string[]
      */
     public $routes_dir = [];
     /**
-     * Defines if the routing system is active or not. It's useful for testing purposes
+     * Defines if the routing system is active or not. It's useful for testing purposes.
      *
      * @var bool
      */
     public $active = true;
     /**
-     * Defines if the routing system will use a database table to hold some of its routes
+     * Defines if the routing system will use a database table to hold some of its routes.
      *
      * @var bool
      */
     public $activate_database_routes = false;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws Throwable
      * @throws InvalidConfigException
@@ -94,7 +92,7 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * Initializes basic config for urlManager for using Yii2 as Laravel routes
+     * Initializes basic config for urlManager for using Yii2 as Laravel routes.
      *
      * This method will set manually
      */
@@ -109,12 +107,13 @@ class Module extends \yii\base\Module
     }
 
     /**
-     * Initializes basic config for urlManager for using Yii2 as Laravel routes
+     * Initializes basic config for urlManager for using Yii2 as Laravel routes.
      *
      * This method will call [[buildRules()]] to parse the given rule declarations and then append or insert
      * them to the existing [[rules]].
      *
      * @param string[] $routesDir
+     *
      * @throws Exception
      */
     public function loadUrlRoutes($routesDir)
@@ -133,32 +132,30 @@ class Module extends \yii\base\Module
             if (is_dir($dir)) {
                 /** @var DirectoryIterator $fileInfo */
                 foreach (new DirectoryIterator($dir) as $fileInfo) {
-
                     if ($fileInfo->isDot()) {
                         continue;
                     }
 
                     if ($fileInfo->isFile() && $fileInfo->isReadable()) {
                         // loads the file and executes the Route:: calls
-                        include_once($fileInfo->getPathName());
+                        include_once $fileInfo->getPathName();
                     }
                 }
             } else {
-                throw new Exception($dir . ' it\'s not a valid directory.');
+                throw new Exception($dir.' it\'s not a valid directory.');
             }
         }
     }
 
     /**
-     * Load routes from Database if the $activate_database_routes parameter is true
+     * Load routes from Database if the $activate_database_routes parameter is true.
      *
      * @throws Throwable
      */
     public function loadDBRoutes()
     {
         if ($this->activate_database_routes === true) {
-
-            $dependency = new TagDependency(array('tags' => [self::className()]));
+            $dependency = new TagDependency(['tags' => [self::className()]]);
 
             $route_list = RouteDb::getDb()->cache(static function ($db) {
                 return RouteDb::find()->where(['app' => Yii::$app->id])->all();

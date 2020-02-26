@@ -3,9 +3,8 @@
 use cyneek\yii2\routes\components\Route;
 use yii\filters\AccessControl;
 
-
 /**
- * Checks if a user is logged in. If not, it will throw a ForbiddenHttpException
+ * Checks if a user is logged in. If not, it will throw a ForbiddenHttpException.
  */
 Route::filter('logged_in', [
     'class' => AccessControl::class,
@@ -19,22 +18,21 @@ Route::filter('logged_in', [
 ]);
 
 /**
- * Checks if a user is logged out. If not, it will throw a ForbiddenHttpException
+ * Checks if a user is logged out. If not, it will throw a ForbiddenHttpException.
  */
 Route::filter('logged_out', [
     'class' => AccessControl::class,
     'rules' => [
         [
             'actions' => ['login'],
-            'allow' => true,
-            'roles' => ['@'],
+            'allow'   => true,
+            'roles'   => ['@'],
         ],
     ],
 ]);
 
-
 /**
- * Checks if a user is logged out. If not, it will throw a ForbiddenHttpException
+ * Checks if a user is logged out. If not, it will throw a ForbiddenHttpException.
  */
 Route::filter('is_admin', [
     'class' => AccessControl::class,
@@ -46,11 +44,9 @@ Route::filter('is_admin', [
     ],
 ]);
 
-
 /**
- * BASIC SITES
+ * BASIC SITES.
  */
-
 Route::any('user', 'user/default/index', ['filter' => 'is_admin']);
 Route::any('user/login', 'user/login', ['filter' => 'logged_out']);
 Route::any('user/logout', 'user/logout');
@@ -67,20 +63,17 @@ Route::any('user/auth/login', 'user/auth/login');
 Route::any('user/auth/connect', 'user/auth/connect');
 
 /**
- * ADMIN SITES
+ * ADMIN SITES.
  */
-
 Route::any('user/admin', 'user/admin');
 Route::any('user/admin/view', 'user/admin/view');
 Route::any('user/admin/create', 'user/admin/create');
 Route::any('user/admin/update', 'user/admin/update');
 Route::any('user/admin/delete', 'user/admin/delete');
 
-
 /**
- * OAUTH SITES
+ * OAUTH SITES.
  */
-
 Route::any('user/auth/login', 'user/auth/login');
 Route::any('user/auth/connect', 'user/auth/connect');
 
