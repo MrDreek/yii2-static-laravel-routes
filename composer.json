@@ -7,21 +7,31 @@
     "route",
     "filter"
   ],
-  "version": "0.0.4",
+  "version": "0.1.0",
   "type": "yii2-extension",
   "license": "BSD",
   "authors": [
     {
       "name": "Patroklo",
       "email": "patroklo@gmail.com"
+    },
+    {
+      "name": "Klyosow Nikita",
+      "email": "mrdreek777@gmail.com"
     }
   ],
   "require": {
-    "yiisoft/yii2": "*"
+    "yiisoft/yii2": "~2.0",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
   },
   "autoload": {
     "psr-4": {
       "cyneek\\yii2\\routes\\": ""
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

@@ -23,7 +23,7 @@ class Route extends ActiveRecord
     /**
      * @inheritdoc
      */
-    static function tableName()
+    public static function tableName()
     {
         return 'site_routes';
     }
