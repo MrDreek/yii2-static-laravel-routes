@@ -4,12 +4,8 @@ namespace cyneek\yii2\routes\models;
 
 use yii\db\ActiveRecord;
 
-
 /**
- * Class Route
- * @package cyneek\yii2\routes\models
- *
- * Database route
+ * Class Route.
  *
  * @property int $id
  * @property string $type
@@ -21,7 +17,7 @@ use yii\db\ActiveRecord;
 class Route extends ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {

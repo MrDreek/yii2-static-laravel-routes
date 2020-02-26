@@ -5,7 +5,6 @@ use yii\db\Schema;
 
 class m150323_114239_routes extends Migration
 {
-
     public function tableName()
     {
         return \cyneek\yii2\routes\models\Route::tableName();
@@ -19,18 +18,17 @@ class m150323_114239_routes extends Migration
         }
 
         $this->createTable($this->tableName(), [
-            'id' => Schema::TYPE_PK,
-            'type' => Schema::TYPE_STRING . '(25) NOT NULL',
-            'uri' => Schema::TYPE_STRING . '(255) NOT NULL',
-            'route' => Schema::TYPE_STRING . '(255) NOT NULL',
+            'id'     => Schema::TYPE_PK,
+            'type'   => Schema::TYPE_STRING.'(25) NOT NULL',
+            'uri'    => Schema::TYPE_STRING.'(255) NOT NULL',
+            'route'  => Schema::TYPE_STRING.'(255) NOT NULL',
             'config' => Schema::TYPE_TEXT,
-            'app' => Schema::TYPE_STRING . '(50) NOT NULL',
+            'app'    => Schema::TYPE_STRING.'(50) NOT NULL',
         ], $tableOptions);
 
         // add indexes for performance optimization
         $this->createIndex('{{%site_routes_type_app}}', $this->tableName(), ['type', 'app'], true);
         $this->createIndex('{{%site_routes_app}}', $this->tableName(), ['app'], false);
-
     }
 
     public function safeDown()

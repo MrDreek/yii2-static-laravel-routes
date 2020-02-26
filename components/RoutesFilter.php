@@ -8,7 +8,6 @@ use yii\base\Module;
 
 class RoutesFilter extends ActionFilter
 {
-
     public $rule;
 
     public $type;
@@ -51,10 +50,11 @@ class RoutesFilter extends ActionFilter
         return false;
     }
 
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
      * @param Action $action
+     *
      * @return bool
      */
     protected function isActive($action)
@@ -67,9 +67,9 @@ class RoutesFilter extends ActionFilter
                 $id = substr($id, strlen($mid) + 1);
             }
 
-            $id = $action->controller->getUniqueId() . '/' . $id;
+            $id = $action->controller->getUniqueId().'/'.$id;
         } else {
-            $id = $action->controller->getUniqueId() . '/' . $action->id;
+            $id = $action->controller->getUniqueId().'/'.$action->id;
         }
 
         return !in_array($id, $this->except, true) && (empty($this->only) || in_array($id, $this->only, true));
